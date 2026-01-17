@@ -1,0 +1,4 @@
+venv
+source/*
+work/*
+.DS_Store
