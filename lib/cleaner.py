@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import re
 
 WORK_DIR = Path("work")
-INPUT_HTML = WORK_DIR / "index.html"
-OUTPUT_HTML = WORK_DIR / "index_limpo.html"
+INPUT_HTML = WORK_DIR / "html" / "index.html"
+OUTPUT_HTML = WORK_DIR / "html" / "index_limpo.html"
 
 with open(INPUT_HTML, "r", encoding="utf-8", errors="ignore") as f:
     soup = BeautifulSoup(f, "lxml")
@@ -22,6 +22,13 @@ for div in soup.find_all("div"):
 for span in soup.find_all("span"):
     if not span.get_text(strip=True):
         span.decompose()
+
+# -------------------------------------------------
+# 2️⃣ Remover p (paragraphs) vazios
+# -------------------------------------------------
+for p in soup.find_all("p"):
+    if not p.get_text(strip=True):
+        p.decompose()
 
 # -------------------------------------------------
 # 3️⃣ Corrigir hifenização de quebra de linha
